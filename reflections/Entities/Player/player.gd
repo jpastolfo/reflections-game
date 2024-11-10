@@ -9,9 +9,12 @@ const Axis := {
 
 
 @export var speed = 300.0
-@export var rotation_speed = 5
+@export var rotation_speed = 180
 const JUMP_VELOCITY = -600.0
 var screen_size
+var current_rotation := 0.0
+const n_rotation_points := 36
+const rotation_step := 360 / n_rotation_points
 
 func _ready() -> void:
 	$AnimatedSprite2D.play()
@@ -28,6 +31,7 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis(Axis.LEFT, Axis.RIGHT)
 	
+	
 	if direction:
 		velocity.x = direction * speed
 	else:
@@ -42,7 +46,8 @@ func _physics_process(delta: float) -> void:
 	var rotation_direction := Input.get_axis(Axis.ROT_LEFT, Axis.ROT_RIGHT)
 	
 	if rotation_direction:
-		rotate(rotation_direction * rotation_speed * delta)
+		current_rotation += rotation_direction * rotation_speed * delta
+		rotation_degrees = floor(current_rotation / rotation_step) * rotation_step
 
 
 	move_and_slide()
