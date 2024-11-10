@@ -11,13 +11,9 @@ config_version=5
 [application]
 
 config/name="reflections"
-run/main_scene="res://Levels/MechanicsLevel.tscn"
+run/main_scene="res://Levels/art_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/icon.svg"
-
-[rendering]
-
-textures/canvas_textures/default_texture_filter=0
 
 [input]
 
@@ -67,3 +63,7 @@ ui_rright={
 [physics]
 
 2d/default_gravity=1980.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -9,10 +9,12 @@ const Axis := {
 
 
 @export var speed = 300.0
-@export var rotation_speed = 0.5
+@export var rotation_speed = 5
 const JUMP_VELOCITY = -600.0
 var screen_size
 
+func _ready() -> void:
+	$AnimatedSprite2D.play()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -30,6 +32,12 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+		
+	if velocity.x != 0:
+		$AnimatedSprite2D.animation = "walk"
+		$AnimatedSprite2D.flip_h = velocity.x < 0
+	else:
+		$AnimatedSprite2D.animation = "still"
 	
 	var rotation_direction := Input.get_axis(Axis.ROT_LEFT, Axis.ROT_RIGHT)
 	
